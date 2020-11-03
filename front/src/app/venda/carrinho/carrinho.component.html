@@ -1,0 +1,38 @@
+
+<table class="table mt-4" *ngIf="carrinhoNotnull">
+  <tr class="thead-dark">
+      <th>Produto</th>
+      <th>Preço</th>
+      <th>Quantidade atual</th>
+      <th>Preço total por item</th>
+      <th>Quantidade para atualizar</th>
+      <th class="text-center">Opções</th>
+  </tr>
+
+  <!-- ao inves de usar "*ngIf="alunos != null" na tag tabela, podemos usar alunos?.data para parar de dar erros
+  porem caso n tiver .data ou outra coisa do tipo, vc ira usa colchetes(instanciar um array) na variavel ou usar ? em cada atributo ex "alun?.id" -->
+  <tr *ngFor="let prodCarrinho of carrinho">
+      <td>
+          {{prodCarrinho?.produto.nome}}
+      </td>
+      <td>
+          {{prodCarrinho?.produto.preco}}
+      </td>
+      <td>
+          {{prodCarrinho?.quantidade}}
+      </td>
+      <td>
+          {{prodCarrinho?.quantidade * prodCarrinho?.produto.preco}}
+      </td>
+      <td>
+          <input #quantidadeInput type="text" value="{{prodCarrinho?.quantidade}}">
+      </td>
+      <td class="text-center">
+          <button class="btn btn-warning mr-3" (click) = "atualizarCarrinho(quantidadeInput.value,prodCarrinho?.produto.id)">Atualizar</button>
+          
+          <button class="btn btn-danger" (click) = "deletarDoCarrinho(prodCarrinho)">Deletar</button>
+      </td>
+  </tr>
+  Preço Total: R${{valorTotal}}
+  <button class="btn btn-primary"  [routerLink]="['../finalizar-venda']" routerLinkActive="router-link-active">Finalizar Compra</button>
+</table>

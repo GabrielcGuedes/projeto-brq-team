@@ -1,0 +1,75 @@
+<form [formGroup]="produtoForm">
+  <div class="row justify-content-center mt-5">
+
+    <div class="col-sm-10">
+      <h2 class="text-center">Cadastro de Produtos</h2>
+    </div>
+    <div class="col-sm-10 row">
+      <div class="col-sm-12">
+        <div class="col-sm-2 pl-0">
+          <div class="form-group" *ngIf="isEdicao">
+            <label for="id_produto">ID</label>
+            <input type="text" id="id_produto" class="form-control" [readOnly]="true" formControlName="id" placeholder="ID do Produto">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="form-group">
+          <label>Produto</label>
+          <input type="text" class="form-control" formControlName="nome" placeholder="Nome do produto">
+          <app-mostrar-erros [isError]="isErrorField( 'nome' )" [mensagem]="'Nome obrigatório'"></app-mostrar-erros>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div formGroupName="categoria">
+          <label for="categoria">Categoria</label>
+          <select class="form-control" formControlName="id" id="categoria">
+            <option *ngFor="let cat of categorias" [value]="cat?.id" >{{ cat?.nome }}</option>
+          </select>
+          <app-mostrar-erros [isError]="isErrorField( 'categoria' )" [mensagem]="'Categoria obrigatória'"></app-mostrar-erros>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Descrição</label>
+          <input type="text" class="form-control" formControlName="descricao" placeholder="Descrição do Produto">
+        </div>
+        <app-mostrar-erros [isError]="isErrorField( 'descricao' )" [mensagem]="'Descrição obrigatória'"></app-mostrar-erros>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label >Preço</label>
+          <input type="text" class="form-control" formControlName="preco" placeholder="Preço">
+        </div>
+        <app-mostrar-erros [isError]="isErrorField( 'preco' )" [mensagem]="'Preço obrigatório'"></app-mostrar-erros>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Imagens</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Selecione as imagens do produto'"
+            [data]="imagens"
+            formControlName="imagens"
+            [settings]="dropdownSettings"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+          >
+          </ng-multiselect-dropdown>
+
+        </div>
+        <app-mostrar-erros [isError]="isErrorField( 'imagens' )" [mensagem]="'Link da imagem obrigatória!'"></app-mostrar-erros>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="form-group d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary" (click)="EnviarProduto()">{{textoBotao}}</button>
+          <button class="btn btn btn-success" [routerLink]="['/adm/produto']">Voltar</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</form>

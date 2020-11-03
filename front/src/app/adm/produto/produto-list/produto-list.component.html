@@ -1,0 +1,51 @@
+<div class="row justify-content-center mt-5">
+
+  <div class="col-sm-10 row mt-4 mb-4">
+
+    <div class="col-9 pl-0">
+      <input class="form-control" [(ngModel)]="busca" (keyup)="onSearch()" placeholder="Digite o nome do produto para busca" />
+    </div>
+    <div class="col-3">
+      <div class="float-right">
+        <button class="btn btn-primary" [routerLink]="['/adm/produto/form']">Criar</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="col-sm-10">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Imagem</th>
+          <th scope="col" class="text-center">Operações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of listaDoProduto?.content | paginate : { itemsPerPage: linhas, currentPage: paginador, totalItems: totalElements }">
+          <th scope="row">{{prod?.id}}</th>
+          <td>{{prod?.nome}}</td>
+          <td>{{prod?.descricao}}</td>
+          <td>{{prod?.preco}}</td>
+          <td>{{prod?.categoria?.nome}}</td>
+          <td><img class="" [src]="prod?.imagens[0]?.url" style="width: 4rem;"></td>
+          <td class="text-center">
+              <button class="btn mr-2" [routerLink]="['/adm/produto/form', prod?.id]">Atualizar</button>
+              <button class="btn" (click)="excluirProduto(prod?.id)">Deletar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-sm-12 text-center">
+      <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+  </div>
+
+</div>

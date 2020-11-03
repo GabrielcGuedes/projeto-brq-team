@@ -1,0 +1,101 @@
+<head>
+  <script>
+    $(document).on('click', '.dropdown-menu', function (e) {
+  e.stopPropagation();
+});
+
+// make it as accordion for smaller screens
+if ($(window).width() < 992) {
+  $('.dropdown-menu a').click(function(e){
+    e.preventDefault();
+      if($(this).next('.submenu').length){
+        $(this).next('.submenu').toggle();
+      }
+      $('.dropdown').on('hide.bs.dropdown', function () {
+     $(this).find('.submenu').hide();
+  })
+  });
+}
+  </script>
+
+</head>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
+  <a class="navbar-brand " [routerLink]="['']" routerLinkActive="active">Treinamento BRQ</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse " id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item dropdown lista rounded" *ngIf="isAdmin">
+        <a class="nav-link dropdown-toggle bg-danger " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false"> Administrador </a>
+          <ul class ="dropdown-menu bg-danger">
+            <li><a class="dropdown-item"> Usuarios ➭ </a>
+              <ul class="submenu dropdown-menu bg-danger">
+                <li><a class="dropdown-item " [routerLink]="['/adm/usuarios']" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}"> Lista Usuários</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/adm/usuarios/form']" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}"> Cadastrar Usuário</a></li>
+              </ul>
+            </li>
+            <li><a class="dropdown-item"> Produtos ➭ </a>
+              <ul class="submenu dropdown-menu bg-danger">
+                <li><a class="dropdown-item" [routerLink]="['adm/produto/list']" routerLinkActive="active"> Lista de Produtos</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/adm/produto/form']" routerLinkActive="active"> Cadastrar Produto</a></li>
+              </ul>
+            </li>
+            <li><a class="dropdown-item"> Categoria ➭ </a>
+              <ul class="submenu dropdown-menu bg-danger">
+                <li><a class="dropdown-item" [routerLink]="['/adm/categoria']" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}"> Lista de Categorias</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/adm/categoria/form']" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}"> Cadastrar Categoria</a></li>
+              </ul>
+            </li>
+
+            <li><a class="dropdown-item"> Imagens ➭ </a>
+              <ul class="submenu dropdown-menu bg-danger">
+                <li><a class="dropdown-item" [routerLink]="['/adm/imagem/list']" routerLinkActive="active"> Lista de Imagens</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/adm/imagem/form']" routerLinkActive="active"> Cadastrar Imagem</a></li>
+              </ul>
+            </li>
+
+
+          </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right nav-link" *ngIf="!isAuthenticated">
+      <li><a class="nav-link " [routerLink]="['/login']" routerLinkActive="active"><i class="material-icons">login</i>
+          Login</a></li>
+      <li><a class="nav-link " [routerLink]="['/cadastro']" routerLinkActive="active">
+          <i class="material-icons">person</i> Cadastro</a></li>
+    </ul>
+
+    <ul class = "navbar-nav navbar-right nav-link">
+
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a class="nav-link" [routerLink]="['/venda/carrinho']" routerLinkActive="active">Meu Carrinho 🛒
+          <span class="sr-only"></span></a>
+      </li>
+
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <div class="dropdown">
+          <a class="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Olá, {{nomeUsuario}}!</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <p class="dropdown-item" [routerLink]= "['/meu-perfil']" >Meu Perfil </p>
+            <a class="dropdown-item" (click)="logout()">Sair</a>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+
+
+
+  </div>
+</nav>

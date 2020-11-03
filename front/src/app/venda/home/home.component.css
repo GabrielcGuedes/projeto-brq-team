@@ -1,0 +1,32 @@
+#box {
+    border: solid rgba(0,0,0,0.26) 1px;
+    width: 18rem;
+}
+
+#box:hover {
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 8px rgba(0,0,0,0.45);
+    width: 18rem;
+}
+
+#title {
+    font-size: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+#texto-label {
+    text-align: center;
+    align-items: center;
+    color: rgb(2, 2, 175);
+    font-weight: 500;
+    font-size: 20px;
+}
+#texto { 
+    text-align: center;
+    align-items: center;
+    font-size: 25px;
+    color: rgb(2, 2, 175);
+    font-weight: 500;
+
+}

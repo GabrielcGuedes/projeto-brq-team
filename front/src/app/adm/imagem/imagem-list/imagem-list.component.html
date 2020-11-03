@@ -1,0 +1,31 @@
+<div class="mt-5 row container-fluid">
+
+  <div class="col-sm-12 row mt-4 mb-4 justify-content-center">
+
+    <div class="col-sm-6 pl-0">
+      <input class="form-control" [(ngModel)]="busca" (keyup)="onSearch()" placeholder="Buscar..." />
+    </div>
+    <div class="col-sm-2">
+      <div class="float-right">
+        <button class="btn btn-primary" [routerLink]="['/adm/imagem/form']">Criar</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-sm-8 row">
+    <div class="card d-flex m-2"   *ngFor="let imagem of imagens?.content | paginate : { itemsPerPage: imagensPorPagina, currentPage: paginador, totalItems: totalElements }">
+      <img class="card-img-top mx-auto" src="{{imagem.url}}" alt="Card image cap" style="width: 10rem; height: 10rem;">
+      <div class="card-body text-center">
+        <h5 class="card-title">{{imagem.nome}}</h5>
+        <a class="btn btn-primary mr-4" [routerLink]="['/adm/imagem/form', imagem?.id]">Editar</a>
+        <a class="btn btn-primary" (click)="deletarImagem(imagem?.id)">Deletar</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-12 text-center">
+    <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<h2>Editar informações</h2>
+<form [formGroup]="formUsuarios" (submit)="onSubmit()">
+
+      <!-- Nome do Usuario -->
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" formControlName="nome" placeholder="Nome do usuário">
+    </div>
+
+    <app-mostrar-erros [isError]="isErrorField('nome')" [mensagem] = "'Nome Obrigatório'">
+    </app-mostrar-erros>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" formControlName="email" placeholder="Email do usuário">
+    </div>
+
+    <app-mostrar-erros [isError]="isErrorField('email')" [mensagem] = "'Email Obrigatório'">
+    </app-mostrar-erros>
+
+    <button type="submit" class="btn btn-primary">Editar</button>
+
+  </form>

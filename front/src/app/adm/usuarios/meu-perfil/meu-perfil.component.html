@@ -1,0 +1,50 @@
+<div class="container">
+    <!-- Informações do usuário-->
+      <div class="d-flex justify-content">
+          <h2 class="h2 mr-5 bg-danger col-12 rounded"> Meu perfil</h2>
+      </div>
+      <table class="table">
+        <tr class="bg-dark rounded"><th class="titulo">Informações da conta</th>
+            <th style="text-align: end;"><button [routerLink]="['alterar']" class="btn btn-warning">Editar Informações</button></th>
+        </tr>
+          <tr>
+              <th>Nome:</th>
+              <td>{{usuario?.nome}}</td>
+          </tr>
+
+          <tr>
+            <th>Email:</th>
+            <td>{{usuario?.email}}</td>
+        </tr>
+        <tr class="bg-dark rounded"><th class="titulo">Endereço</th>
+            <th style="text-align: end;"><button  [routerLink]="['../endereco']" class="btn btn-warning">Editar Endereço</button></th>
+        </tr>
+        <tr>
+            <th>CEP:</th>
+            <td>{{usuario?.endereco?.cep}}</td>
+        </tr>
+        <tr>
+            <th>Logradouro:</th>
+            <td>{{usuario?.endereco?.logradouro}}</td>
+        </tr>
+        <tr>
+            <th>Número:</th>
+            <td>{{usuario?.endereco?.numero}}</td>
+        </tr>
+
+        <tr>
+            <th>Bairro:</th>
+            <td>{{usuario?.endereco?.bairro}}</td>
+        </tr>
+
+        <tr>
+            <th>Cidade:</th>
+            <td>{{usuario?.endereco?.cidade}}</td>
+        </tr>
+
+        <tr>
+            <th>Estado:</th>
+            <td>{{usuario?.endereco?.estado}}</td>
+        </tr>
+      </table>
+  
